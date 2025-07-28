@@ -13,7 +13,7 @@ const Lock = ({ lock }: { lock: boolean }) => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-6 text-gray-300"
+        className="size-6 text-gray-300 hover:-translate-y-0.5 active:scale-95 transition-transform duration-300 ease-in-out"
       >
         <path
           strokeLinecap="round"
@@ -30,7 +30,7 @@ const Lock = ({ lock }: { lock: boolean }) => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-6 text-green-400"
+        className="size-6 text-green-400 hover:-translate-y-0.5 active:scale-95 transition-transform duration-300 ease-in-out"
       >
         <path
           strokeLinecap="round"
@@ -45,12 +45,10 @@ export const SpendingItem = ({
   spending,
   RemoveSpending,
   UpdateSpending,
-  ValidateValue,
 }: {
   spending: Spending;
   RemoveSpending: (id: number) => void;
   UpdateSpending: (spending: Spending) => void;
-  ValidateValue: (elm: HTMLInputElement) => void;
 }) => {
   // Toggle lock state
   let [lock, setLock] = useState(true);
@@ -59,6 +57,15 @@ export const SpendingItem = ({
   let [title, setTitle] = useState(spending.title);
   let [value, setValue] = useState(spending.value);
   let [date, setDate] = useState(spending.date);
+
+  const ValidateValue = (elm: HTMLInputElement) => {
+    let currVal = Number(elm.value);
+    if (currVal < 0) currVal = -currVal;
+
+    setValue(currVal);
+
+    elm.value = currVal.toString();
+  };
 
   useEffect(() => {
     setTitle(spending.title);
@@ -97,7 +104,7 @@ export const SpendingItem = ({
     >
       <input
         type="text"
-        className="p-1"
+        className="p-1 focus:outline-none"
         disabled={lock}
         value={title}
         onChange={(event) => setTitle(event.target.value)}
@@ -105,14 +112,14 @@ export const SpendingItem = ({
       <input
         type="number"
         min={0}
-        className="p-1"
+        className="p-1 focus:outline-none"
         disabled={lock}
         value={value}
         onChange={(event) => ValidateValue(event.target)}
       />
       <input
         type="date"
-        className="p-1"
+        className="p-1 focus:outline-none"
         disabled={lock}
         value={date}
         onChange={(event) => setDate(event.target.value)}
@@ -127,7 +134,7 @@ export const SpendingItem = ({
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-6 text-red-400"
+          className="size-6 text-red-400 hover:-translate-y-0.5 active:scale-95 transition-transform duration-300 ease-in-out"
         >
           <path
             strokeLinecap="round"

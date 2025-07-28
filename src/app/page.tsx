@@ -120,23 +120,28 @@ export default function Home() {
           <input
             type="text"
             placeholder="Tên khoản chi"
-            className="p-1"
+            className="p-1 focus:outline-none hover:-translate-y-0.5 transition-transform duration-300 ease-in-out"
             onChange={(event) => setTitle(event.target.value)}
           />
           <input
             type="number"
             placeholder="Số tiền"
             min={0}
-            className="p-1"
+            className="p-1 focus:outline-none hover:-translate-y-0.5 transition-transform duration-300 ease-in-out"
             onChange={(event) => ValidateValue(event.target)}
           />
           <input
             type="date"
             value={date}
-            className="p-1"
+            className="p-1 focus:outline-none hover:-translate-y-0.5 transition-transform duration-300 ease-in-out"
             onChange={(event) => setDate(event.target.value)}
           />
-          <button onClick={() => addSpending()}>Thêm</button>
+          <button
+            className="text-white bg-gray-500 p-2 rounded hover:-translate-y-0.5 active:scale-95 transition-transform duration-300 ease-in-out"
+            onClick={() => addSpending()}
+          >
+            Thêm
+          </button>
         </div>
         <div className="w-full flex gap-5">
           <i>Số lần chi:</i> <strong id="number-of-spending">0</strong>
@@ -149,7 +154,6 @@ export default function Home() {
           spendings={spendings}
           RemoveSpending={RemoveSpending}
           UpdateSpending={UpdateSpending}
-          ValidateValue={ValidateValue}
         />
       </main>
     </div>
